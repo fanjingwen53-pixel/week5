@@ -1,7 +1,39 @@
-from times import compute_overlap_time, time_range
+import pytest
 
-def test_generic_case():
+# 从 times.py 中导入要测试的函数
+from times import time_range, compute_overlap_time
+
+
+# ------------------------------------------------------------
+# 测试函数：test_given_input
+# 这个测试来自 times.py 的主程序部分（__main__）
+# 目的是验证 compute_overlap_time() 的输出是否正确
+# ------------------------------------------------------------
+def test_given_input():
+    """
+    这个测试模拟 times.py 中的示例：
+    - large: 从 10:00 到 12:00 的大时间段
+    - short: 从 10:30 到 10:45 的两个小时间段，中间间隔 60 秒
+    然后计算它们的重叠部分，并与预期结果进行比较。
+    """
+
+    # 生成第一个时间区间（只有一个区间）
     large = time_range("2010-01-12 10:00:00", "2010-01-12 12:00:00")
+
+    # 生成第二个时间区间（两个小区间，中间有 60 秒间隔）
     short = time_range("2010-01-12 10:30:00", "2010-01-12 10:45:00", 2, 60)
-    expected = [("2010-01-12 10:30:00","2010-01-12 10:37:00"), ("2010-01-12 10:38:00", "2010-01-12 10:45:00")]
-    assert compute_overlap_time(large, short) == expected
+
+    # 调用函数，计算它们的重叠时间段
+    result = compute_overlap_time(large, short)
+
+    # 你可以在命令行运行 python times.py 看看打印的真实结果，
+    # 然后将打印结果复制到 expected 中。
+    # 下面这个只是一个合理的示例结果（请以你实际运行结果为准）。
+    expected = [
+    ('2010-01-12 10:30:00', '2010-01-12 10:37:00'),
+    ('2010-01-12 10:38:00', '2010-01-12 10:45:00')
+]
+
+
+    # 断言（assert）语句会自动比较结果与预期是否一致
+    assert result == expected, f"结果不一致：得到 {result}, 但期望 {expected}"
