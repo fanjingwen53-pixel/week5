@@ -1,3 +1,8 @@
+#⚠️ 注意：
+#.github 前面有点 → 表示隐藏文件夹。
+#workflows 文件夹必须位于 .github/ 里。
+#文件名必须是 python-tests.yml（或 .yaml，都行）。
+
 name: Python package
 
 on: [push]
